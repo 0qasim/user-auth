@@ -16,7 +16,10 @@ app.use(express.json()); // Use JSON body parsing middleware
 app.use(cookieParser());
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://tiny-plum-pangolin-veil.cyclic.cloud"
+  ); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, X-Requested-With, Accept"
@@ -26,7 +29,7 @@ app.use(function (req, res, next) {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://tiny-plum-pangolin-veil.cyclic.cloud"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: [
