@@ -9,13 +9,10 @@ import Navigation from "./Components/Navigation/Navigation.jsx";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 export const userContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState({});
-
-  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const userCookie = Cookies.get("token");
