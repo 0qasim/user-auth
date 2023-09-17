@@ -1,4 +1,5 @@
 import Home from "./pages/Home";
+import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Project from "./pages/Projects";
 import Services from "./pages/Services";
@@ -8,33 +9,21 @@ import Navigation from "./Components/Navigation/Navigation.jsx";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 export const userContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState({});
 
-  const apiURL = "http://localhost:3001";
-
-  // const axiosInstance = axios.create({
-  //   baseURL: apiURL,
-  //   headers: {
-  //     "Access-Control-Allow-Origin": "http://localhost:3001/", // Allow requests from any origin (adjust as needed)
-  //     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", // Define allowed methods
-  //     "Access-Control-Allow-Headers": "Content-Type, Authorization", // Define allowed headers
-  //   },
-  // });
-
-  axios.defaults.withCredentials = true;
-
   useEffect(() => {
-    axios
-      .get("http://localhost:3002/")
-      .then((user) => {
-        console.log(user);
-        setUser(user.data);
-      })
-      .catch((err) => console.error(err));
+    const userCookie = Cookies.get("token");
+
+    if (userCookie) {
+      // Redirect to the home page
+      window.location.href = "/";
+    } else {
+      // Redirect to the sign-in page
+      window.location.href = "/Signin";
+    }
   }, []);
 
   return (
