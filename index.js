@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 
 app.use(
   cors({
-    origin: ["https://tiny-plum-pangolin-veil.cyclic.cloud"],
+    origin: ["http://localhost:3002"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: [
@@ -89,7 +89,7 @@ app.post("/SignIn", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const employee = await EmployeeModel.findOne({ email });
+    const employee = await EmployeeModel.findOne({ email: email });
 
     if (!employee) {
       return res
